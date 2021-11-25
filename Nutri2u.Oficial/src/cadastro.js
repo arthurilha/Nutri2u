@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Text,StyleSheet, View , Image, TextInput,TouchableOpacity} from 'react-native'
-import Nutri2u from './Nutri2u'
-
+import { criar } from './Firebase/script';
 
 export default function cadastrar({navigation}) {
-  
+  const [email, setEmail] = useState('');
+  const [senha1, setSenha1] = useState('');
   
     return(
       <View style={styles.Container}>
@@ -12,17 +12,21 @@ export default function cadastrar({navigation}) {
         style={styles.logo}
         />
         <Text style={styles.logoTexto}>Nutri2u</Text>
-      <TextInput
-      style={ styles.input}
-        placeholder = " Digite seu email"
-      />
-       <TextInput
-        style={ styles.input}
-        secureTextEntry={true}
-        placeholder = " Digite sua senha"
-      />
+        <TextInput 
+              placeholder="Email" 
+              onChangeText={setEmail} 
+              value={email} 
+              style={styles.input}
+            />
+       <TextInput 
+              placeholder="Senha" 
+              onChangeText={setSenha1} 
+              value={senha1} 
+              style={styles.input}
+              secureTextEntry={true}
+            />
       <TouchableOpacity style={styles.botao} 
-        onPress={()=>navigation.navigate(Nutri2u)}
+         onPress={()=>{criar(email,senha1)}}
         >
         <Text style={styles.botaoTexto}>Cadastrar</Text>
 
