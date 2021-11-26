@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Text,StyleSheet, View , Image, TextInput,TouchableOpacity} from 'react-native'
 import { criar } from './Firebase/script';
+import Login from './Login';
 
 export default function cadastrar({navigation}) {
   const [email, setEmail] = useState('');
@@ -31,8 +32,16 @@ export default function cadastrar({navigation}) {
         <Text style={styles.botaoTexto}>Cadastrar</Text>
 
       </TouchableOpacity>
+        
+        <Text style={ styles.cadastro}>
+        Para logar,  
+        <Text style={styles.link}
+       onPress={()=>navigation.navigate(Login)}
+       >
+         clique aqui!
+        </Text>
 
-    
+        </Text>
       </View>
   )
  }

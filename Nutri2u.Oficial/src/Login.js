@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Text,StyleSheet, View , Image, TextInput,TouchableOpacity} from 'react-native'
 import Nutri2u from './Nutri2u'
 import cadastrar from './cadastro'
+import { logar } from './Firebase/script';
 
 export default function Login({navigation}) {
-  
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
   
     return(
       <View style={styles.Container}>
@@ -12,21 +14,32 @@ export default function Login({navigation}) {
         style={styles.logo}
         />
         <Text style={styles.logoTexto}>Nutri2u</Text>
-      <TextInput
-      style={ styles.input}
-        placeholder = " Digite seu email"
-      />
-       <TextInput
-        style={ styles.input}
-        secureTextEntry={true}
-        placeholder = " Digite sua senha"
-      />
+        <TextInput 
+              placeholder="Email" 
+              onChangeText={setEmail} 
+              value={email} 
+              style={styles.input}
+            />
+       <TextInput 
+              placeholder="Senha" 
+              onChangeText={setSenha} 
+              value={senha} 
+              style={styles.input}
+              secureTextEntry={true}
+            />
+      <TouchableOpacity style={styles.botaoc} 
+        onPress={()=>{logar(email,senha)}}
+        >
+        <Text style={styles.botaoTexto}>confirmar dados</Text>
+
+      </TouchableOpacity>
       <TouchableOpacity style={styles.botao} 
         onPress={()=>navigation.navigate(Nutri2u)}
         >
         <Text style={styles.botaoTexto}>Login</Text>
 
       </TouchableOpacity>
+      
 
       <Text style={ styles.cadastro}>
         Se você não for cadastrado,  
@@ -73,7 +86,7 @@ const styles = StyleSheet.create({
       width:150,
       height:60,
       backgroundColor:'#2CB039',
-      marginTop:50,
+      marginTop:30,
       borderRadius:10,
       alignItems:'center',
       justifyContent:  'center'
@@ -97,7 +110,18 @@ const styles = StyleSheet.create({
       },
       link:{
         color:'#2CB039'
+      },
+      botaoc:{
+        width:150,
+      height:30,
+      backgroundColor:'#2CB039',
+      marginTop:10,
+      borderRadius:10,
+      alignItems:'center',
+      justifyContent:  'center'
+
       }
+      
 
 
 })
